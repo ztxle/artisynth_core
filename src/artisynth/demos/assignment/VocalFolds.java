@@ -8,11 +8,8 @@ import artisynth.core.mechmodels.*;
 import artisynth.core.workspace.RootModel;
 import artisynth.core.femmodels.*;
 import artisynth.core.femmodels.FemModel.SurfaceRender;
-import artisynth.core.materials.LinearMaterial;
 
-import maspack.geometry.*;
 import maspack.matrix.Point3d;
-import maspack.matrix.Vector3d;
 import maspack.matrix.RigidTransform3d;
 import maspack.render.RenderProps;
 
@@ -35,12 +32,10 @@ public class VocalFolds extends RootModel {
    
    private void setRenderProps(FemModel3d fem) {
       fem.setSurfaceRendering (SurfaceRender.Shaded);
-//      RenderProps.setLineColor (fem, Color.DARK_GRAY);
+      RenderProps.setLineColor (fem, Color.DARK_GRAY);
       if (!SHOW_RENDERING)
          RenderProps.setLineWidth (fem, 0);
-      RenderProps.setLineColor (fem, new Color (249/255f, 212/255f, 160/255f));
       RenderProps.setFaceColor (fem, new Color (249/255f, 212/255f, 160/255f));
-//      RenderProps.setFaceColor (fem, Color.WHITE);
    }
    
    
@@ -159,7 +154,4 @@ public class VocalFolds extends RootModel {
       }
       return medialNodes;
    }
-   
-   
-   
 }
