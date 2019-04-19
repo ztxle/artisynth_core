@@ -7,3 +7,9 @@ working on it.
 
 No worries -- I don't intend to be merging this to the main artisynth_core 
 repo!
+
+
+Loading this model:
+    $ git clone https://github.com/ztxle/artisynth_core.git
+    $ cd artisynth_core
+    $ bin/artisynth -model artisynth.demos.assignment.VocalFolds
