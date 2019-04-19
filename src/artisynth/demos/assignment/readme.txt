@@ -1,4 +1,4 @@
-Model developed for a course, HG4049 The Meat of Speech, under the guidance
+Model developed for a course, HG4071 The Meat of Speech, under the guidance
 of Asst Prof Scott Moisik, at Nanyang Technological University, Singapore.
 
 I realize this model should really belong in the artisynth_models repo, but
