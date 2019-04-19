@@ -1,6 +1,7 @@
 package artisynth.demos.assignment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import artisynth.core.femmodels.FemNode3d;
 import artisynth.core.modelbase.ControllerBase;
@@ -14,11 +15,17 @@ public class VocalFoldsController extends ControllerBase {
    private static final int FREQUENCY = 200;  // Hz
    private static final double PERIOD = 1.0 / FREQUENCY;  // sec
    
+   // For caching references to nodes
    private ArrayList<FemNode3d> leftNodes;
    private ArrayList<FemNode3d> rightNodes;
    
+   // For caching copies of original positions
    private ArrayList<Point3d> leftOrigPos;
    private ArrayList<Point3d> rightOrigPos;
+   
+   // For memoizing maximum displacements by axes
+   private HashMap<Double, Double> maxDisplaceX = new HashMap<Double, Double>();
+   private HashMap<Double, Double> maxDisplaceY = new HashMap<Double, Double>();
    
    private double elapsed = 0;
    
@@ -121,12 +128,21 @@ public class VocalFoldsController extends ControllerBase {
    private double calcMaxDisplaceX(double zOffset) {
       double x = zOffset / (VOCAL_FOLD_WIDTH);
 //      x = 0.5;
-      return Math.abs (MAX_DISPLACEMENT_X * Math.cos (x * 0.5 * Math.PI));
+      if ( !maxDisplaceX.containsKey (x) )
+         this.maxDisplaceX.put (
+               x, 
+               Math.abs (MAX_DISPLACEMENT_X * Math.cos (x * 0.5 * Math.PI)));
+      return maxDisplaceX.get (x); 
    };
+   
    
    private double calcMaxDisplaceY(double zOffset) {
       double x = zOffset / (VOCAL_FOLD_WIDTH);
 //      x = 0.5;
-      return Math.abs (MAX_DISPLACEMENT_Y * Math.cos (x * 0.5 * Math.PI));
+      if ( !maxDisplaceY.containsKey (x) )
+         maxDisplaceY.put (
+               x, 
+               Math.abs (MAX_DISPLACEMENT_Y * Math.cos (x * 0.5 * Math.PI)));
+      return maxDisplaceY.get (x);
    };
 }
